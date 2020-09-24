@@ -15,10 +15,11 @@
   },
   "keywords": [],
   "license": "ISC",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "name": "ociconnection",
   "scripts": {
     "start": "node index.js"
   },
-  "version": "1.0.2"
+  "version": "1.0.3"
 }
