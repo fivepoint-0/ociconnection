@@ -8,7 +8,6 @@
     "tslib": "^2.0.1",
     "xml2js": "^0.4.23"
   },
-  "deprecated": "no",
   "description": "Broadsoft Application Server OCI Helper",
   "devDependencies": {
     "@types/node": "^13.9.0",
@@ -17,9 +16,9 @@
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
-  "name": "broadsoftoci",
+  "name": "ociconnection",
   "scripts": {
     "start": "node index.js"
   },
-  "version": "1.0.3"
+  "version": "1.0.1"
 }
