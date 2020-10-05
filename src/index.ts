@@ -1,34 +1,34 @@
 import net from 'net'
 import crypto from 'crypto'
 import { Parser } from 'xml2js'
-import { BroadsoftXMLHelper } from './xml'
+import { BroadsoftDocument, BroadsoftXMLHelper } from './xml'
 
 export class OCIConnection {
-  private username: any
-  private signedPassword: any
+  public sessionId: string
   private host: any
   private port: any
-  private password: any
-  private client: net.Socket
-  public sessionId: string
   private parser: Parser
+  private client: net.Socket
   private helper: BroadsoftXMLHelper
+  private password: any
+  private username: any
+  private signedPassword: any
 
   constructor(host: string, port: string, username: string, password: string) {
     this.host = host
     this.port = port
     this.username = username
     this.password = password
-    this.client = new net.Socket()
-    this.sessionId = Math.floor(Math.random() * 100000000000000).toString()
     this.signedPassword = ''
     this.parser = new Parser()
+    this.client = new net.Socket()
     this.helper = new BroadsoftXMLHelper()
+    this.sessionId = Math.floor(Math.random() * 100000000000000).toString()
 
     this.helper.setSessionId(this.sessionId)
   }
 
-  public command(name: string, data: any, convertToJsonStructure: boolean = true): any {
+  public command(name: string, data: any, convertToJSON: boolean = true): any {
 
     this.helper.setCommandName(name)
     this.helper.setCommandData(data)
@@ -40,7 +40,6 @@ export class OCIConnection {
     return new Promise((res, rej) => {
 
       this.client.on("error", (data: any) => {
-        console.log(data.toString())
         rej(data.toString())
       })
 
@@ -49,7 +48,7 @@ export class OCIConnection {
         completeData += data.toString()
         this.parser.parseString(completeData, (err: any, data: any) => {
           if (!err) {
-            if (convertToJsonStructure) {
+            if (convertToJSON) {
               res(this.helper.parser.toJson(completeData))
             } else {
               res(completeData)
@@ -88,5 +87,9 @@ export class OCIConnection {
           .catch((response: any) => reject(Error(response)))
       })
     })
+  }
+
+  public static isError(document: BroadsoftDocument) {
+    return document.command.$["xsi:type"] === 'ErrorResponse'
   }
 }

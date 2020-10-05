@@ -44,7 +44,7 @@ export declare class BroadsoftXMLHelper {
     setCommandName(commandName: string): void;
     getCommandName(): string;
     setCommandData(data: any): void;
-    getCommandData(): any;
+    getCommandData(): IOCICommand;
     getXml(): string;
 }
 //# sourceMappingURL=index.d.ts.map

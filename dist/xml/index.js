@@ -17,7 +17,6 @@ class Xml2JsXMLParser extends XMLParser {
         return this.parser.parseStringPromise(xml);
     }
     toXml(json) {
-        console.log("JSON INCOMING: ", JSON.stringify(json, null, 2));
         return this.builder.buildObject(json);
     }
 }
@@ -78,10 +77,9 @@ class BroadsoftXMLHelper {
         }
     }
     getCommandData() {
-        return this['baseBody']['command']['_'];
+        return this['baseBody']['command'];
     }
     getXml() {
-        console.log(this.baseBody);
         return this.parser.toXml({
             BroadsoftDocument: this.baseBody
         });

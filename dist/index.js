@@ -12,21 +12,20 @@ class OCIConnection {
         this.port = port;
         this.username = username;
         this.password = password;
-        this.client = new net_1.default.Socket();
-        this.sessionId = Math.floor(Math.random() * 100000000000000).toString();
         this.signedPassword = '';
         this.parser = new xml2js_1.Parser();
+        this.client = new net_1.default.Socket();
         this.helper = new xml_1.BroadsoftXMLHelper();
+        this.sessionId = Math.floor(Math.random() * 100000000000000).toString();
         this.helper.setSessionId(this.sessionId);
     }
-    command(name, data, convertToJsonStructure = true) {
+    command(name, data, convertToJSON = true) {
         this.helper.setCommandName(name);
         this.helper.setCommandData(data);
         this.client.write(this.helper.getXml());
         let completeData = "";
         return new Promise((res, rej) => {
             this.client.on("error", (data) => {
-                console.log(data.toString());
                 rej(data.toString());
             });
             // not getting enough data after command
@@ -34,7 +33,7 @@ class OCIConnection {
                 completeData += data.toString();
                 this.parser.parseString(completeData, (err, data) => {
                     if (!err) {
-                        if (convertToJsonStructure) {
+                        if (convertToJSON) {
                             res(this.helper.parser.toJson(completeData));
                         }
                         else {
@@ -70,6 +69,9 @@ class OCIConnection {
                 }));
             }));
         });
+    }
+    static isError(document) {
+        return document.command.$["xsi:type"] === 'ErrorResponse';
     }
 }
 exports.OCIConnection = OCIConnection;
