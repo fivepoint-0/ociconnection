@@ -47,7 +47,7 @@ export class OCIConnection {
       this.client.on("data", (data: any) => {
         completeData += data.toString()
         this.parser.parseString(completeData, (err: any, data: any) => {
-          if (!err) {
+          if (!err && completeData.includes('</BroadsoftDocument>')) {
             if (convertToJSON) {
               res(this.helper.parser.toJson(completeData))
             } else {

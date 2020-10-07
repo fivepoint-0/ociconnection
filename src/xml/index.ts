@@ -6,10 +6,12 @@ export abstract class XMLParser {
   abstract toJson (xml: object|string): Promise<any>|object
 }
 
+
 export default class Xml2JsXMLParser extends XMLParser {
   
   private parser: xml2js.Parser
   private builder: xml2js.Builder
+  //
 
   constructor () {
     super()
