@@ -2,8 +2,9 @@ import net from 'net'
 import crypto from 'crypto'
 import { Parser } from 'xml2js'
 import { BroadsoftDocument, BroadsoftXMLHelper } from './xml'
+import BroadsoftDataUtility from './dataUtil'
 
-export class OCIConnection {
+class OCIConnection {
   public sessionId: string
   private host: any
   private port: any
@@ -92,4 +93,9 @@ export class OCIConnection {
   public static isError(document: BroadsoftDocument) {
     return document.command.$["xsi:type"] === 'ErrorResponse'
   }
+}
+
+export default {
+  OCIConnection,
+  BroadsoftDataUtility
 }
