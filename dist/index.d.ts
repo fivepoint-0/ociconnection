@@ -1,5 +1,6 @@
 import { BroadsoftDocument } from './xml';
-export declare class OCIConnection {
+import BroadsoftDataUtility from './dataUtil';
+declare class OCIConnection {
     sessionId: string;
     private host;
     private port;
@@ -14,4 +15,9 @@ export declare class OCIConnection {
     login(): Promise<unknown>;
     static isError(document: BroadsoftDocument): boolean;
 }
+declare const _default: {
+    OCIConnection: typeof OCIConnection;
+    BroadsoftDataUtility: typeof BroadsoftDataUtility;
+};
+export default _default;
 //# sourceMappingURL=index.d.ts.map

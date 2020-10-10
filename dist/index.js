@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OCIConnection = void 0;
 const tslib_1 = require("tslib");
 const net_1 = tslib_1.__importDefault(require("net"));
 const crypto_1 = tslib_1.__importDefault(require("crypto"));
 const xml2js_1 = require("xml2js");
 const xml_1 = require("./xml");
+const dataUtil_1 = tslib_1.__importDefault(require("./dataUtil"));
 class OCIConnection {
     constructor(host, port, username, password) {
         this.host = host;
@@ -74,5 +74,8 @@ class OCIConnection {
         return document.command.$["xsi:type"] === 'ErrorResponse';
     }
 }
-exports.OCIConnection = OCIConnection;
+exports.default = {
+    OCIConnection,
+    BroadsoftDataUtility: dataUtil_1.default
+};
 //# sourceMappingURL=index.js.map
