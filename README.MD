@@ -2,6 +2,38 @@
 
 ## Changes:
 
+### 1.0.12: Added _dotenv_ and _jest_ to test Broadsoft data utility and main class function calls for better development. Planning to add easy docker deployment to this project for 1.0.13.
+
+Easy Setup for project using _dotenv_ and _ociconnection_:
+
+`.env` File Setup:
+```dotenv
+BROADSOFT_TEST_HOST=<IP ADDRESS/HOST NAME OF OCI SERVER HERE>
+BROADSOFT_TEST_PORT=<PORT FOR APPLICATION SERVER API>
+BROADSOFT_TEST_USERNAME=<OCI_USERNAME_HERE>
+BROADSOFT_TEST_PASSWORD=<OCI_PASSWORD_HERE>
+```
+
+
+`index.ts` Minimal File Setup:
+```ts
+import { OCIConnection } from 'ociconnection'
+
+const main = async () => {
+
+  const ociConnection = new OCIConnection(
+    <string>process.env.BROADSOFT_TEST_HOST,
+    <string>process.env.BROADSOFT_TEST_PORT,
+    <string>process.env.BROADSOFT_TEST_USERNAME,
+    <string>process.env.BROADSOFT_TEST_PASSWORD
+  )
+
+  await ociConnection.login()
+}
+
+main()
+```
+
 ### 1.0.10: Added a data utility to help with return data from BroadWorks
 
 - Added OCITable helper static function `BroadsoftDataUtility.parseOciTable` to convert e.g. `ociResponse.BroadsoftDocument.command[0].userTable[0]` from 

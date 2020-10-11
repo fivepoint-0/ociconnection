@@ -1,8 +1,6 @@
 /node_modules
-/tests
 debug*
 *debug**log*
-jest.config.js
 *.*build*
-babel.config.js
 debug.log
+*.env

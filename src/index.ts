@@ -93,9 +93,13 @@ class OCIConnection {
   public static isError(document: BroadsoftDocument) {
     return document.command.$["xsi:type"] === 'ErrorResponse'
   }
+
+  public die() {
+    this.client.destroy()
+  }
 }
 
-export default {
+export {
   OCIConnection,
   BroadsoftDataUtility
 }
