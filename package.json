@@ -30,7 +30,7 @@
     "start": "node index.js",
     "test": "jest"
   },
-  "version": "1.0.14",
+  "version": "1.0.15",
   "repository": {
     "type": "git",
     "url": "https://github.com/fivepoint-0/ociconnection.git"

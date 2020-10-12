@@ -1,6 +1,5 @@
 import { BroadsoftDocument } from './xml';
-import BroadsoftDataUtility from './dataUtil';
-declare class OCIConnection {
+export declare class OCIConnection {
     sessionId: string;
     private host;
     private port;
@@ -14,10 +13,10 @@ declare class OCIConnection {
     command(name: string, data: any, convertToJSON?: boolean): any;
     login(): Promise<unknown>;
     static isError(document: BroadsoftDocument): boolean;
+    die(): void;
 }
-declare const _default: {
-    OCIConnection: typeof OCIConnection;
-    BroadsoftDataUtility: typeof BroadsoftDataUtility;
-};
-export default _default;
+export declare class BroadsoftDataUtility {
+    static sentenceToCamelCase(_s: string): string;
+    static parseOciTable(ociTable: any): any;
+}
 //# sourceMappingURL=index.d.ts.map
