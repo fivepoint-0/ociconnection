@@ -34,7 +34,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/fivepoint-0/ociconnection.git"
-  },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
-
+  }
 }
