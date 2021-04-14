@@ -2,6 +2,7 @@
 
 ## Changes:
 
+### 1.0.17: Fixed parseOciTable and removed _dist/_ folder.
 
 ### 1.0.16: Added another data utility function for parseOciTable. 
 

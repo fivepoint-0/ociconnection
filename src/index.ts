@@ -114,7 +114,7 @@ export class BroadsoftDataUtility {
     return s
   }
 
-  public parseOciTable(ociTable: any, names?: string[]): any {
+  public static parseOciTable(ociTable: any, names?: string[]): any {
     if (names) {
       const m = names.map((name: string, i: number) => {
         const n = ociTable[i]
