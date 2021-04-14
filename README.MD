@@ -2,6 +2,52 @@
 
 ## Changes:
 
+
+### 1.0.16: Added another data utility function for parseOciTable. 
+
+An example of the arguments would be from a response like ServiceProviderServicePackGetUtilizationListResponse:
+
+```ts
+const commandResponse = ServiceProviderServicePackGetUtilizationListResponse
+  .BroadsoftDocument
+  .command[0]
+
+const table = commandResponse.serviceUtilizationTable
+const names = commandResponse.servicePackNames
+
+const tableData = BroadsoftDataUtility.parseOciTable(table, names)
+
+// Example format for output:
+
+let response = [
+  {
+    "name": "ServicePack1",
+    "items": [
+        {
+            "group": "GROUP_ONE",
+            "totalPacks": "3",
+            "assigned": "3"
+        },
+        {
+            "group": "GROUP_THREE",
+            "totalPacks": "3",
+            "assigned": "3"
+        }
+    ]
+  },
+  {
+    "name": "ServicePack2",
+    "items": [
+        {
+            "group": "GROUP_TWO",
+            "totalPacks": "10",
+            "assigned": "10"
+        }
+    ]
+  }
+]
+```
+
 ### 1.0.12: Added _dotenv_ and _jest_ to test Broadsoft data utility and main class function calls for better development. Planning to add easy docker deployment to this project for 1.0.13.
 
 Easy Setup for project using _dotenv_ and _ociconnection_:

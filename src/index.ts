@@ -105,31 +105,55 @@ export class BroadsoftDataUtility {
     let chars = _s.split('')
     chars.shift()
     chars.forEach((char, index, arr) => {
-        if (char == ' ') {
-            arr[index+1] = arr[index+1].toUpperCase()
-        } else {
-            s += char
-        }
+      if (char == ' ') {
+        arr[index + 1] = arr[index + 1].toUpperCase()
+      } else {
+        s += char
+      }
     })
     return s
   }
+
+  public parseOciTable(ociTable: any, names?: string[]): any {
+    if (names) {
+      const m = names.map((name: string, i: number) => {
+        const n = ociTable[i]
+        const ch = n.colHeading
+        
+        if (n.row) {
+          let o = n.row.map((row: any, j: number) => {
+            let data = row.col
+    
+            return data.reduce((p: any, c: any, k: number) => { return { ...p, [BroadsoftDataUtility.sentenceToCamelCase(ch[k])]: c }}, {})
+          })
+          
+          return {
+            name,
+            items: o
+          }
+        }
+      })
   
-  public static parseOciTable(ociTable: any): any { 
-    let table: any = [];
-  
-    let colHeadings = ociTable.colHeading.map((heading: string) => {
+      return m
+    } else {
+
+      let table: any = [];
+
+      let colHeadings = ociTable.colHeading.map((heading: string) => {
         return BroadsoftDataUtility.sentenceToCamelCase(heading);
-    });
-  
-    ociTable.row.forEach((colRoot: { col: any[] }) => {
+      });
+
+      ociTable.row.forEach((colRoot: { col: any[] }) => {
         //TODO: these abstract objects should be simpleTypes or complexTypes to ensure data typing
         let colData: any = {}
         colRoot.col.forEach((col: any, index: string | number) => {
-            colData[colHeadings[index]] = col;
+          colData[colHeadings[index]] = col;
         })
         table.push(colData)
-    })
-    
-    return table;
+      })
+
+      return table;
+    }
   }
+
 }
