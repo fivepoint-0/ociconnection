@@ -12,9 +12,10 @@ export class OCIConnection {
   private helper: BroadsoftXMLHelper
   private password: any
   private username: any
+  private debug: boolean = false
   private signedPassword: any
 
-  constructor(host: string, port: string, username: string, password: string) {
+  constructor(host: string, port: string, username: string, password: string, debug: boolean = false) {
     this.host = host
     this.port = port
     this.username = username
@@ -24,8 +25,12 @@ export class OCIConnection {
     this.client = new net.Socket()
     this.helper = new BroadsoftXMLHelper()
     this.sessionId = Math.floor(Math.random() * 100000000000000).toString()
-
+    this.setDebug(debug)
     this.helper.setSessionId(this.sessionId)
+  }
+
+  public setDebug(debug: boolean) {
+    this.debug = debug
   }
 
   public command(name: string, data: any, convertToJSON: boolean = true): any {
@@ -33,7 +38,13 @@ export class OCIConnection {
     this.helper.setCommandName(name)
     this.helper.setCommandData(data)
 
-    this.client.write(this.helper.getXml())
+    const commandXml = this.helper.getXml()
+
+    this.client.write(commandXml)
+
+    if (this.debug) {
+      console.log(commandXml)
+    }
 
     let completeData = ""
 
@@ -48,6 +59,9 @@ export class OCIConnection {
         completeData += data.toString()
         this.parser.parseString(completeData, (err: any, data: any) => {
           if (!err && completeData.includes('</BroadsoftDocument>')) {
+            if (this.debug) {
+              console.log(completeData)
+            }
             if (convertToJSON) {
               res(this.helper.parser.toJson(completeData))
             } else {
@@ -89,16 +103,20 @@ export class OCIConnection {
     })
   }
 
-  public static isError(document: BroadsoftDocument) {
-    return document.command.$["xsi:type"] === 'ErrorResponse'
-  }
-
   public die() {
     this.client.destroy()
+  }
+
+  public static isError(document: BroadsoftDocument) {
+    return document.command.$["xsi:type"] === 'ErrorResponse'
   }
 }
 
 export class BroadsoftDataUtility {
+  public static isError(document: BroadsoftDocument) {
+    return document.command.$["xsi:type"] === 'ErrorResponse'
+  }
+
   public static sentenceToCamelCase(_s: string) {
     if (_s.length < 2) { return _s }
     let s = _s[0].toLowerCase()
@@ -140,19 +158,19 @@ export class BroadsoftDataUtility {
       let table: any = [];
 
       let colHeadings = ociTable.colHeading.map((heading: string) => {
-        return BroadsoftDataUtility.sentenceToCamelCase(heading);
+        return BroadsoftDataUtility.sentenceToCamelCase(heading)
       });
 
       ociTable.row.forEach((colRoot: { col: any[] }) => {
         //TODO: these abstract objects should be simpleTypes or complexTypes to ensure data typing
         let colData: any = {}
         colRoot.col.forEach((col: any, index: string | number) => {
-          colData[colHeadings[index]] = col;
+          colData[colHeadings[index]] = col
         })
         table.push(colData)
       })
 
-      return table;
+      return table
     }
   }
 
