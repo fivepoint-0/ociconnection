@@ -7,7 +7,8 @@ const crypto_1 = tslib_1.__importDefault(require("crypto"));
 const xml2js_1 = require("xml2js");
 const xml_1 = require("./xml");
 class OCIConnection {
-    constructor(host, port, username, password) {
+    constructor(host, port, username, password, debug = false) {
+        this.debug = false;
         this.host = host;
         this.port = port;
         this.username = username;
@@ -17,12 +18,20 @@ class OCIConnection {
         this.client = new net_1.default.Socket();
         this.helper = new xml_1.BroadsoftXMLHelper();
         this.sessionId = Math.floor(Math.random() * 100000000000000).toString();
+        this.setDebug(debug);
         this.helper.setSessionId(this.sessionId);
+    }
+    setDebug(debug) {
+        this.debug = debug;
     }
     command(name, data, convertToJSON = true) {
         this.helper.setCommandName(name);
         this.helper.setCommandData(data);
-        this.client.write(this.helper.getXml());
+        const commandXml = this.helper.getXml();
+        this.client.write(commandXml);
+        if (this.debug) {
+            console.log(commandXml);
+        }
         let completeData = "";
         return new Promise((res, rej) => {
             this.client.on("error", (data) => {
@@ -33,6 +42,9 @@ class OCIConnection {
                 completeData += data.toString();
                 this.parser.parseString(completeData, (err, data) => {
                     if (!err && completeData.includes('</BroadsoftDocument>')) {
+                        if (this.debug) {
+                            console.log(completeData);
+                        }
                         if (convertToJSON) {
                             res(this.helper.parser.toJson(completeData));
                         }
@@ -70,15 +82,18 @@ class OCIConnection {
             }));
         });
     }
-    static isError(document) {
-        return document.command.$["xsi:type"] === 'ErrorResponse';
-    }
     die() {
         this.client.destroy();
+    }
+    static isError(document) {
+        return document.command.$["xsi:type"] === 'ErrorResponse';
     }
 }
 exports.OCIConnection = OCIConnection;
 class BroadsoftDataUtility {
+    static isError(document) {
+        return document.command.$["xsi:type"] === 'ErrorResponse';
+    }
     static sentenceToCamelCase(_s) {
         if (_s.length < 2) {
             return _s;

@@ -8,14 +8,17 @@ export declare class OCIConnection {
     private helper;
     private password;
     private username;
+    private debug;
     private signedPassword;
-    constructor(host: string, port: string, username: string, password: string);
+    constructor(host: string, port: string, username: string, password: string, debug?: boolean);
+    setDebug(debug: boolean): void;
     command(name: string, data: any, convertToJSON?: boolean): any;
     login(): Promise<unknown>;
-    static isError(document: BroadsoftDocument): boolean;
     die(): void;
+    static isError(document: BroadsoftDocument): boolean;
 }
 export declare class BroadsoftDataUtility {
+    static isError(document: BroadsoftDocument): boolean;
     static sentenceToCamelCase(_s: string): string;
     static parseOciTable(ociTable: any, names?: string[]): any;
 }

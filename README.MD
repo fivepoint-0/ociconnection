@@ -2,6 +2,12 @@
 
 ## Changes:
 
+### 1.0.19: Added debug function to OCIConnection class. The next version will be a breaking change. 
+
+Changelog:
+- Added `setDebug(boolean)` function to the OCIConenction class. This will output the command XML and response XML when `command()` is called.
+- Copied the `isError()` function from the `OCIConnection` class to the `BroadsoftDataUtility` class. In the next version, that function will be removed from the `OCIConnection` class, causing a possible breaking change for some.
+
 ### 1.0.18: Added _dist/_ folder again because of type declarations.
 
 ### 1.0.17: Fixed parseOciTable and removed _dist/_ folder.
