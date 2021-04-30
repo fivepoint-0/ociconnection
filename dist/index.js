@@ -86,13 +86,27 @@ class OCIConnection {
         this.client.destroy();
     }
     static isError(document) {
-        return document.command.$["xsi:type"] === 'ErrorResponse';
+        let response = true;
+        try {
+            response = document.command.$["xsi:type"] === 'ErrorResponse';
+        }
+        catch (err) {
+            response = document.command[0].$["xsi:type"] === 'ErrorResponse';
+        }
+        return response;
     }
 }
 exports.OCIConnection = OCIConnection;
 class BroadsoftDataUtility {
     static isError(document) {
-        return document.command.$["xsi:type"] === 'ErrorResponse';
+        let response = true;
+        try {
+            response = document.command.$["xsi:type"] === 'ErrorResponse';
+        }
+        catch (err) {
+            response = document.command[0].$["xsi:type"] === 'ErrorResponse';
+        }
+        return response;
     }
     static sentenceToCamelCase(_s) {
         if (_s.length < 2) {
