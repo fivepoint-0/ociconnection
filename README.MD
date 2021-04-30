@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.25: No changes to code 
+
 ### 1.0.: No changes to code 
 
 ### 1.0.24: No code changes for patch 24 

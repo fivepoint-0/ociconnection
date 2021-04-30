@@ -24,19 +24,19 @@ case "$UPDATE_LEVEL" in
     echo "Publishing a new PATCH version."
     echo "New PATCH version: $NEW_PATCH_VERSION"
     NEW_VERSION="$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$NEW_PATCH_VERSION"
-    sed -i "/\"patch\":/ s/\"patch\":[^,]*/\"patch\": \"$NEW_PATCH_VERSION\"/" version.json > /dev/null
+    sed -i "/\"patch\":/ s/\"patch\":[^,]*/\"patch\": $NEW_PATCH_VERSION/" version.json > /dev/null
     ;;
   "minor")
     echo "Publishing a new MINOR version."
     echo "New MINOR version: $NEW_MINOR_VERSION"
     NEW_VERSION="$CURRENT_MAJOR_VERSION.$NEW_MINOR_VERSION.$CURRENT_PATCH_VERSION"
-    sed -i "/\"minor\":/ s/\"minor\":[^,]*/\"minor\": \"$NEW_MINOR_VERSION\"/" version.json > /dev/null
+    sed -i "/\"minor\":/ s/\"minor\":[^,]*/\"minor\": $NEW_MINOR_VERSION/" version.json > /dev/null
     ;;
   "major")
     echo "Publishing a new MAJOR version."
     echo "New MAJOR version: $NEW_MAJOR_VERSION"
     NEW_VERSION="$NEW_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$CURRENT_PATCH_VERSION"
-    sed -i "/\"major\":/ s/\"major\":[^,]*/\"major\": \"$NEW_MAJOR_VERSION\"/" version.json > /dev/null
+    sed -i "/\"major\":/ s/\"major\": ?\d*/\"major\": $NEW_MAJOR_VERSION/" version.json > /dev/null
     ;;
   *)
     exit
