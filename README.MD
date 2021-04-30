@@ -2,8 +2,12 @@
 
 ## Changes:
 
+### 1.0.23: No code changes for patch 23 
+
+### 1.0.22: Now building project automatically before publishing.
+
 ### 1.0.21: Built project.
- 
+
 ### 1.0.20: No breaking changes yet. Had to update the isError function. 
 
 ### 1.0.19: Added debug function to OCIConnection class. The next version will be a breaking change. 

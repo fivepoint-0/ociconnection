@@ -28,10 +28,11 @@
   "name": "ociconnection",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "tsc",
+    "install": "npm install",
+    "prepublish": "tsc",
     "test": "jest"
   },
-  "version": "1.0.21",
+  "version": "1.0.22",
   "repository": {
     "type": "git",
     "url": "https://github.com/fivepoint-0/ociconnection.git"
