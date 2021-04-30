@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.24: No code changes for patch 24 
+
 ### 1.0.23: No code changes for patch 23 
 
 ### 1.0.22: Now building project automatically before publishing.

@@ -23,25 +23,27 @@ case "$UPDATE_LEVEL" in
   "patch")
     echo "Publishing a new PATCH version."
     echo "New PATCH version: $NEW_PATCH_VERSION"
-    NEW_VERSION="$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$NEW_PATCH_VERSION"  
+    NEW_VERSION="$CURRENT_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$NEW_PATCH_VERSION"
+    sed -i "/\"patch\":/ s/\"patch\":[^,]*/\"patch\": \"$NEW_PATCH_VERSION\"/" version.json > /dev/null
     ;;
   "minor")
     echo "Publishing a new MINOR version."
     echo "New MINOR version: $NEW_MINOR_VERSION"
-    NEW_VERSION="$CURRENT_MAJOR_VERSION.$NEW_MINOR_VERSION.$CURRENT_PATCH_VERSION"  
+    NEW_VERSION="$CURRENT_MAJOR_VERSION.$NEW_MINOR_VERSION.$CURRENT_PATCH_VERSION"
+    sed -i "/\"minor\":/ s/\"minor\":[^,]*/\"minor\": \"$NEW_MINOR_VERSION\"/" version.json > /dev/null
     ;;
   "major")
     echo "Publishing a new MAJOR version."
     echo "New MAJOR version: $NEW_MAJOR_VERSION"
-    NEW_VERSION="$NEW_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$CURRENT_PATCH_VERSION"  
+    NEW_VERSION="$NEW_MAJOR_VERSION.$CURRENT_MINOR_VERSION.$CURRENT_PATCH_VERSION"
+    sed -i "/\"major\":/ s/\"major\":[^,]*/\"major\": \"$NEW_MAJOR_VERSION\"/" version.json > /dev/null
     ;;
   *)
     exit
     ;;
 esac
 
-cat package.json | sed -i "/\"version\":/ s/\"version\":[^,]*/\"version\": \"$NEW_VERSION\"/" > /dev/null
-
+sed -i "/\"version\":/ s/\"version\":[^,]*/\"version\": \"$NEW_VERSION\"/" package.json > /dev/null
 sed -i "5i ### $NEW_VERSION: $COMMIT_MSG \n" README.MD > /dev/null
 
 npm publish
