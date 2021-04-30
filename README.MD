@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.20: No breaking changes yet. Had to update the isError function. 
+
 ### 1.0.19: Added debug function to OCIConnection class. The next version will be a breaking change. 
 
 Changelog:
