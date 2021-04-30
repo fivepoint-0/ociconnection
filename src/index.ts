@@ -110,9 +110,9 @@ export class OCIConnection {
   public static isError(document: BroadsoftDocument) {
     let response = true
     try {
-      response = document.command.$["xsi:type"] === 'ErrorResponse' || document.command.$["xsi:type"] === 'ErrorResponse'
+      response = document.command.$["xsi:type"].includes('Error')
     } catch (err) {
-      response = document.command[0].$["xsi:type"] === 'ErrorResponse' || document.command[0].$["xsi:type"] === 'ErrorResponse'
+      response = document.command[0].$["xsi:type"].includes('Error')
     }
     return response
   }
@@ -122,9 +122,9 @@ export class BroadsoftDataUtility {
   public static isError(document: BroadsoftDocument) {
     let response = true
     try {
-      response = document.command.$["xsi:type"] === 'ErrorResponse' || document.command.$["xsi:type"] === 'ErrorResponse'
+      response = document.command.$["xsi:type"].includes('Error')
     } catch (err) {
-      response = document.command[0].$["xsi:type"] === 'ErrorResponse' || document.command[0].$["xsi:type"] === 'ErrorResponse'
+      response = document.command[0].$["xsi:type"].includes('Error')
     }
     return response
   }
