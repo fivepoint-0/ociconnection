@@ -88,10 +88,10 @@ class OCIConnection {
     static isError(document) {
         let response = true;
         try {
-            response = document.command.$["xsi:type"] === 'ErrorResponse';
+            response = document.command.$["xsi:type"] === 'ErrorResponse' || document.command.$["xsi:type"] === 'ErrorResponse';
         }
         catch (err) {
-            response = document.command[0].$["xsi:type"] === 'ErrorResponse';
+            response = document.command[0].$["xsi:type"] === 'ErrorResponse' || document.command[0].$["xsi:type"] === 'ErrorResponse';
         }
         return response;
     }
@@ -101,10 +101,10 @@ class BroadsoftDataUtility {
     static isError(document) {
         let response = true;
         try {
-            response = document.command.$["xsi:type"] === 'ErrorResponse';
+            response = document.command.$["xsi:type"] === 'ErrorResponse' || document.command.$["xsi:type"] === 'ErrorResponse';
         }
         catch (err) {
-            response = document.command[0].$["xsi:type"] === 'ErrorResponse';
+            response = document.command[0].$["xsi:type"] === 'ErrorResponse' || document.command[0].$["xsi:type"] === 'ErrorResponse';
         }
         return response;
     }

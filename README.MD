@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.26: Added extra check on the isError function 
+
 ### 1.0.25: No changes to code 
 
 ### 1.0.: No changes to code 
