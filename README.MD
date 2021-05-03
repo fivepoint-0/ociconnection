@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.28: testing new method for xml helper 
+
 ### 1.0.27: Fixed isError function again 
 
 ### 1.0.26: Added extra check on the isError function 

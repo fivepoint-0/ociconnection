@@ -34,7 +34,7 @@ export class OCIConnection {
   }
 
   public command(name: string, data: any, convertToJSON: boolean = true): any {
-
+    this.helper = new BroadsoftXMLHelper()
     this.helper.setCommandName(name)
     this.helper.setCommandData(data)
 

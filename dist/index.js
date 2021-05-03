@@ -25,6 +25,7 @@ class OCIConnection {
         this.debug = debug;
     }
     command(name, data, convertToJSON = true) {
+        this.helper = new xml_1.BroadsoftXMLHelper();
         this.helper.setCommandName(name);
         this.helper.setCommandData(data);
         const commandXml = this.helper.getXml();
