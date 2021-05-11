@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.29: Fixing SAX-JS error with text root outside of node showing up 
+
 ### 1.0.28: testing new method for xml helper 
 
 ### 1.0.27: Fixed isError function again 

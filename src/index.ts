@@ -57,18 +57,23 @@ export class OCIConnection {
       // not getting enough data after command
       this.client.on("data", (data: any) => {
         completeData += data.toString()
-        this.parser.parseString(completeData, (err: any, data: any) => {
-          if (!err && completeData.includes('</BroadsoftDocument>')) {
-            if (this.debug) {
-              console.log(completeData)
+        try {
+
+          this.parser.parseString(completeData, (err: any, data: any) => {
+            if (!err && completeData.includes('</BroadsoftDocument>')) {
+              if (this.debug) {
+                console.log(completeData)
+              }
+              if (convertToJSON) {
+                res(this.helper.parser.toJson(completeData))
+              } else {
+                res(completeData)
+              }
             }
-            if (convertToJSON) {
-              res(this.helper.parser.toJson(completeData))
-            } else {
-              res(completeData)
-            }
-          }
-        })
+          })
+        } catch (err) {
+          rej(err)
+        }
       })
     })
   }
@@ -149,21 +154,21 @@ export class BroadsoftDataUtility {
       const m = names.map((name: string, i: number) => {
         const n = ociTable[i]
         const ch = n.colHeading
-        
+
         if (n.row) {
           let o = n.row.map((row: any, j: number) => {
             let data = row.col
-    
-            return data.reduce((p: any, c: any, k: number) => { return { ...p, [BroadsoftDataUtility.sentenceToCamelCase(ch[k])]: c }}, {})
+
+            return data.reduce((p: any, c: any, k: number) => { return { ...p, [BroadsoftDataUtility.sentenceToCamelCase(ch[k])]: c } }, {})
           })
-          
+
           return {
             name,
             items: o
           }
         }
       })
-  
+
       return m
     } else {
 
