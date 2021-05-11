@@ -56,11 +56,13 @@ export class OCIConnection {
 
       // not getting enough data after command
       this.client.on("data", (data: any) => {
-        completeData += data.toString()
         try {
+          completeData += data.toString()
+          
+          var parsed = this.parser.parseStringPromise(completeData)
 
-          this.parser.parseString(completeData, (err: any, data: any) => {
-            if (!err && completeData.includes('</BroadsoftDocument>')) {
+          parsed.then(data => {
+            if (completeData.includes('</BroadsoftDocument>')) {
               if (this.debug) {
                 console.log(completeData)
               }
@@ -71,6 +73,21 @@ export class OCIConnection {
               }
             }
           })
+          
+          parsed.catch(err => {})
+
+          // this.parser.parseString(completeData, (err: any, data: any) => {
+          //   if (!err && completeData.includes('</BroadsoftDocument>')) {
+          //     if (this.debug) {
+          //       console.log(completeData)
+          //     }
+          //     if (convertToJSON) {
+          //       res(this.helper.parser.toJson(completeData))
+          //     } else {
+          //       res(completeData)
+          //     }
+          //   }
+          // })
         } catch (err) {
           rej(err)
         }
