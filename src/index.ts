@@ -33,7 +33,7 @@ export class OCIConnection {
     this.debug = debug
   }
 
-  public command(name: string, data: any, convertToJSON: boolean = true): any {
+  public command(name: string, data: any, convertToJSON: boolean = true): Promise<any> {
     this.helper = new BroadsoftXMLHelper()
     this.helper.setCommandName(name)
     this.helper.setCommandData(data)
@@ -58,7 +58,7 @@ export class OCIConnection {
       this.client.on("data", (data: any) => {
         try {
           completeData += data.toString()
-          
+
           var parsed = this.parser.parseStringPromise(completeData)
 
           parsed.then(data => {

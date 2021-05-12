@@ -12,7 +12,7 @@ export declare class OCIConnection {
     private signedPassword;
     constructor(host: string, port: string, username: string, password: string, debug?: boolean);
     setDebug(debug: boolean): void;
-    command(name: string, data: any, convertToJSON?: boolean): any;
+    command(name: string, data: any, convertToJSON?: boolean): Promise<any>;
     login(): Promise<unknown>;
     die(): void;
     static isError(document: BroadsoftDocument): boolean;
