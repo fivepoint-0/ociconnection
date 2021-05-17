@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.32: Added logging next to debug in the constructor 
+
 ### 1.0.31: Fixed output type for OCIConnection.command() 
 
 ### 1.0.30: Changing xml2js function to get rid of saxjs error 

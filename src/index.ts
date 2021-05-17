@@ -4,6 +4,7 @@ import { Parser } from 'xml2js'
 import { BroadsoftDocument, BroadsoftXMLHelper } from './xml'
 
 export class OCIConnection {
+  public log: Array<{ request: string, response: string }> = []
   public sessionId: string
   private host: any
   private port: any
@@ -14,10 +15,12 @@ export class OCIConnection {
   private username: any
   private debug: boolean = false
   private signedPassword: any
+  private logXml: boolean = false
 
-  constructor(host: string, port: string, username: string, password: string, debug: boolean = false) {
+  constructor(host: string, port: string, username: string, password: string, debug: boolean = false, log: boolean = false) {
     this.host = host
     this.port = port
+    this.logXml = log
     this.username = username
     this.password = password
     this.signedPassword = ''
@@ -67,6 +70,12 @@ export class OCIConnection {
                 console.log(completeData)
               }
               if (convertToJSON) {
+                if (this.logXml) {
+                  this.log.push({
+                    request: commandXml,
+                    response: completeData
+                  })
+                }
                 res(this.helper.parser.toJson(completeData))
               } else {
                 res(completeData)
@@ -75,19 +84,6 @@ export class OCIConnection {
           })
           
           parsed.catch(err => {})
-
-          // this.parser.parseString(completeData, (err: any, data: any) => {
-          //   if (!err && completeData.includes('</BroadsoftDocument>')) {
-          //     if (this.debug) {
-          //       console.log(completeData)
-          //     }
-          //     if (convertToJSON) {
-          //       res(this.helper.parser.toJson(completeData))
-          //     } else {
-          //       res(completeData)
-          //     }
-          //   }
-          // })
         } catch (err) {
           rej(err)
         }
@@ -127,16 +123,6 @@ export class OCIConnection {
 
   public die() {
     this.client.destroy()
-  }
-
-  public static isError(document: BroadsoftDocument) {
-    let response = true
-    try {
-      response = document.command.$["xsi:type"].includes('Error')
-    } catch (err) {
-      response = document.command[0].$["xsi:type"].includes('Error')
-    }
-    return response
   }
 }
 

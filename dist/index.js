@@ -7,10 +7,13 @@ const crypto_1 = tslib_1.__importDefault(require("crypto"));
 const xml2js_1 = require("xml2js");
 const xml_1 = require("./xml");
 class OCIConnection {
-    constructor(host, port, username, password, debug = false) {
+    constructor(host, port, username, password, debug = false, log = false) {
+        this.log = [];
         this.debug = false;
+        this.logXml = false;
         this.host = host;
         this.port = port;
+        this.logXml = log;
         this.username = username;
         this.password = password;
         this.signedPassword = '';
@@ -49,6 +52,12 @@ class OCIConnection {
                                 console.log(completeData);
                             }
                             if (convertToJSON) {
+                                if (this.logXml) {
+                                    this.log.push({
+                                        request: commandXml,
+                                        response: completeData
+                                    });
+                                }
                                 res(this.helper.parser.toJson(completeData));
                             }
                             else {
@@ -57,18 +66,6 @@ class OCIConnection {
                         }
                     });
                     parsed.catch(err => { });
-                    // this.parser.parseString(completeData, (err: any, data: any) => {
-                    //   if (!err && completeData.includes('</BroadsoftDocument>')) {
-                    //     if (this.debug) {
-                    //       console.log(completeData)
-                    //     }
-                    //     if (convertToJSON) {
-                    //       res(this.helper.parser.toJson(completeData))
-                    //     } else {
-                    //       res(completeData)
-                    //     }
-                    //   }
-                    // })
                 }
                 catch (err) {
                     rej(err);
@@ -104,16 +101,6 @@ class OCIConnection {
     }
     die() {
         this.client.destroy();
-    }
-    static isError(document) {
-        let response = true;
-        try {
-            response = document.command.$["xsi:type"].includes('Error');
-        }
-        catch (err) {
-            response = document.command[0].$["xsi:type"].includes('Error');
-        }
-        return response;
     }
 }
 exports.OCIConnection = OCIConnection;

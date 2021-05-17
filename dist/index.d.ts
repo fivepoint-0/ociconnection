@@ -1,5 +1,9 @@
 import { BroadsoftDocument } from './xml';
 export declare class OCIConnection {
+    log: Array<{
+        request: string;
+        response: string;
+    }>;
     sessionId: string;
     private host;
     private port;
@@ -10,12 +14,12 @@ export declare class OCIConnection {
     private username;
     private debug;
     private signedPassword;
-    constructor(host: string, port: string, username: string, password: string, debug?: boolean);
+    private logXml;
+    constructor(host: string, port: string, username: string, password: string, debug?: boolean, log?: boolean);
     setDebug(debug: boolean): void;
     command(name: string, data: any, convertToJSON?: boolean): Promise<any>;
     login(): Promise<unknown>;
     die(): void;
-    static isError(document: BroadsoftDocument): boolean;
 }
 export declare class BroadsoftDataUtility {
     static isError(document: BroadsoftDocument): boolean;
