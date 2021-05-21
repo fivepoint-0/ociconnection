@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.36: Attempt to fix log in OCIConnection class (3) 
+
 ### 1.0.35: Attempt to fix log in OCIConnection class (2) 
 
 ### 1.0.34: Attempt to fix log in OCIConnection class 

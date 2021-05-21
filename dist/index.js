@@ -55,7 +55,7 @@ class OCIConnection {
                                 if (this.logXml) {
                                     this.log.push({
                                         request: commandXml,
-                                        response: completeData
+                                        response: completeData.split("\n")[completeData.split("\n").length - 1]
                                     });
                                 }
                                 res(this.helper.parser.toJson(completeData));
