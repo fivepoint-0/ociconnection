@@ -63,6 +63,7 @@ class OCIConnection {
                             else {
                                 res(completeData);
                             }
+                            completeData = "";
                         }
                     });
                     parsed.catch(err => { });

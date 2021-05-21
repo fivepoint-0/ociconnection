@@ -68,6 +68,7 @@ export class OCIConnection {
               if (this.debug) {
                 console.log(completeData)
               }
+              
               if (convertToJSON) {
                 if (this.logXml) {
                   this.log.push({
@@ -76,9 +77,12 @@ export class OCIConnection {
                   })
                 }
                 res(this.helper.parser.toJson(completeData))
+
               } else {
                 res(completeData)
               }
+
+              completeData = ""
             }
           })
           
