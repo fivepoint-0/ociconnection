@@ -36,8 +36,8 @@ class OCIConnection {
         if (this.debug) {
             console.log(commandXml);
         }
-        let completeData = "";
         return new Promise((res, rej) => {
+            let completeData = "";
             this.client.on("error", (data) => {
                 rej(data.toString());
             });

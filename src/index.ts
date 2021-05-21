@@ -49,9 +49,8 @@ export class OCIConnection {
       console.log(commandXml)
     }
 
-    let completeData = ""
-
     return new Promise((res, rej) => {
+      let completeData = ""
 
       this.client.on("error", (data: any) => {
         rej(data.toString())

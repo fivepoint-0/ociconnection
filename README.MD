@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.34: Attempt to fix log in OCIConnection class 
+
 ### 1.0.33: Nothing much changed. 
 
 ### 1.0.32: Added logging next to debug in the constructor 
