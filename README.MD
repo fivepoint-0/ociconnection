@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.37: Fixing completeData. Thinking about changing XML parsers. 
+
 ### 1.0.36: Attempt to fix log in OCIConnection class (3) 
 
 ### 1.0.35: Attempt to fix log in OCIConnection class (2) 

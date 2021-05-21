@@ -81,8 +81,6 @@ export class OCIConnection {
               } else {
                 res(completeData)
               }
-
-              completeData = ""
             }
           })
           
