@@ -24,7 +24,7 @@ export declare class BroadsoftDocument {
         $: {
             "xmlns": "";
         };
-        _: string;
+        _: string | string[];
     };
     command: IOCICommand;
 }
@@ -40,7 +40,7 @@ export declare class BroadsoftXMLHelper {
     baseBody: BroadsoftDocument;
     parser: Xml2JsXMLParser;
     setSessionId(sessionId: string): void;
-    getSessionId(): string;
+    getSessionId(): string | string[];
     setCommandName(commandName: string): void;
     getCommandName(): string;
     setCommandData(data: any): void;

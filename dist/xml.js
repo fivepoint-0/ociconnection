@@ -59,7 +59,7 @@ class BroadsoftXMLHelper {
         this.parser = new Xml2JsXMLParser();
     }
     setSessionId(sessionId) {
-        this['baseBody']['sessionId']['_'] = sessionId;
+        this['baseBody']['sessionId']['_'] = [sessionId];
     }
     getSessionId() {
         return this['baseBody']['sessionId']['_'];

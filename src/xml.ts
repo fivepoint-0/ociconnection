@@ -45,7 +45,7 @@ export class BroadsoftDocument {
     $: {
       "xmlns": ""
     }
-    _: string
+    _: string | string[]
   }
   command: IOCICommand = {
     $: {
@@ -90,7 +90,7 @@ export class BroadsoftXMLHelper {
   parser: Xml2JsXMLParser = new Xml2JsXMLParser()
 
   setSessionId(sessionId: string) {
-    this['baseBody']['sessionId']['_'] = sessionId
+    this['baseBody']['sessionId']['_'] = [sessionId]
   }
 
   getSessionId() {
