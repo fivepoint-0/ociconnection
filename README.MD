@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.0.39: Making host property public 
+
 ### 1.0.38: Changing sessionId code. The sessionId does not appear to be showing up in debug. 
 
 ### 1.0.37: Fixing completeData. Thinking about changing XML parsers. 

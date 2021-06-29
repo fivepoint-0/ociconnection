@@ -6,7 +6,7 @@ import { BroadsoftDocument, BroadsoftXMLHelper } from './xml'
 export class OCIConnection {
   public log: Array<{ request: string, response: string }> = []
   public sessionId: string
-  private host: any
+  public host: any
   private port: any
   private parser: Parser
   private client: net.Socket

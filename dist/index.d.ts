@@ -5,7 +5,7 @@ export declare class OCIConnection {
         response: string;
     }>;
     sessionId: string;
-    private host;
+    host: any;
     private port;
     private parser;
     private client;
