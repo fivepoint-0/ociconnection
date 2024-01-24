@@ -13,7 +13,7 @@
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
     "@types/node": "^13.13.48",
-    "@types/xml2js": "^0.4.8",
+    "@types/xml2js": "^0.4.14",
     "babel": "^6.23.0",
     "babel-jest": "^26.6.3",
     "dotenv": "^8.2.0",
@@ -31,7 +31,7 @@
     "prepare": "tsc",
     "test": "jest"
   },
-  "version": "1.0.39",
+  "version": ".1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/fivepoint-0/ociconnection.git"

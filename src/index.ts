@@ -141,7 +141,7 @@ export class BroadsoftDataUtility {
   public static sentenceToCamelCase(_s: string) {
     if (_s.length < 2) { return _s }
     let s = _s[0].toLowerCase()
-    let chars = _s.split('')
+    let chars = _s.toLowerCase().split('')
     chars.shift()
     chars.forEach((char, index, arr) => {
       if (char == ' ') {
