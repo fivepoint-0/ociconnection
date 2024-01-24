@@ -120,7 +120,7 @@ class BroadsoftDataUtility {
             return _s;
         }
         let s = _s[0].toLowerCase();
-        let chars = _s.split('');
+        let chars = _s.toLowerCase().split('');
         chars.shift();
         chars.forEach((char, index, arr) => {
             if (char == ' ') {
