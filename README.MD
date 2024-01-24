@@ -2,6 +2,8 @@
 
 ## Changes:
 
+### 1.1.1: adding dist for 1.1.0 
+
 ### 1.1.0: fixing sentenceToCamelCase function to work on words that are uppercase acronyms like MAC and converts them to i.e. mac instead of mAC 
 
 ### .1.0: fixing sentenceToCamelCase function to work on words that are uppercase acronyms like MAC and converts them to i.e. mac instead of mAC 
