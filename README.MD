@@ -4,6 +4,8 @@
 
 ### .1.0: fixing sentenceToCamelCase function to work on words that are uppercase acronyms like MAC and converts them to i.e. mac instead of mAC 
 
+### .1.0: fixing sentenceToCamelCase function to work on words that are uppercase acronyms like MAC and converts them to i.e. mac instead of mAC 
+
 ### 1.0.39: Making host property public 
 
 ### 1.0.38: Changing sessionId code. The sessionId does not appear to be showing up in debug. 
